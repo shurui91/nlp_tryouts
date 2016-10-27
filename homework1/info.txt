@@ -1,0 +1,15 @@
+[Executed at: Fri Sep 23 17:19:30 PDT 2016]
+
+
+Precision	Recall	F1
+Ham	0.95	0.98	0.96
+Spam	0.99	0.98	0.99
+Weighted Avg.	0.98
+
+The number of distinct words in total is 108009
+The number of distinct words in ham_dictionary is 40308
+The number of distinct words in spam_dictionary is 85793
+The number of words in ham_dictionary is 2620220
+The number of words in spam_dictionary is 1839210
+Number of hams is 9533
+Number of spams is 7496
