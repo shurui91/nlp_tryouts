@@ -1,0 +1,95 @@
+Assignment 2 Report
+
+Name: Shurui Liu
+
+Part I.
+
+1. Performance of standard perceptron on the development data with 100% of the training data
+1a. spam precision: 0.99
+1b. spam recall: 0.99
+1c. spam F1 score: 0.99
+1d. ham precision:0.96
+1e. ham recall: 0.97
+1f. ham F1 score:0.97
+
+2. Performance of averaged perceptron on the development data with 100% of the training data
+2a. spam precision: 0.99
+2b. spam recall: 0.99
+2c. spam F1 score: 0.99
+2d. ham precision: 0.97
+2e. ham recall: 0.96
+2f. ham F1 score: 0.97
+
+Part II.
+
+3. Performance of standard perceptron on the development data with 10% of the training data
+3a. spam precision: 0.966
+3b. spam recall: 0.957
+3c. spam F1 score: 0.961
+3d. ham precision: 0.961
+3e. ham recall: 0.967
+3f. ham F1 score: 0.964
+
+4. Performance of averaged perceptron on the development data with 10% of the training data
+4a. spam precision: 0.951
+4b. spam recall: 0.942
+4c. spam F1 score: 0.946
+4d. ham precision: 0.944
+4e. ham recall: 0.952
+4f. ham F1 score: 0.949
+
+Part III. You are welcome to reuse code you wrote for assignment 1,
+but we would like to know how you handled the following tasks.
+
+5. How did you calculate precision, recall and F1 score? If you used a
+separate script, please give the name of the script and describe how
+to run it.
+
+Answer: 
+I used almost the same code as the one I submit in homework 1, the code filename is "per_classify_part2.py"
+When you run this code, you can see my output looks like this below (this result is just a test for /dev folder). 
+Classified hams are 1475
+Classified spams are 3557
+The precision for hams is 0.947
+The precision for spams is 0.993
+There are 1500 files belongs in hams.
+There are 3640 files belongs in spams.
+The recall for hams is 0.983
+The recall for spams is 0.977
+F1 for hams is 0.965
+F1 for spams is 0.985
+    precision  recall  F1
+Ham    0.947  0.983  0.965
+Spam    0.993  0.977  0.985
+
+
+The way I calculate things is below,
+
+PRECISION
+Precision is basically the percentage of correctness that I idenfity those files in /dev folder. 
+I read every line of the output file to see if both HAM and "ham.txt" (SPAM and "spam.txt") are exist.
+Use this number to divide the total number of files in /dev folder to get the precision.
+
+RECALL
+Recall = precision (ham) / files that labeled as ham, same logic for spam.
+
+F1 = (2 * precision * recall) / (precision + recall), this is same for both ham and spam.
+
+
+
+6. How did you separate 10% of the training data? If you used a
+separate script, please give the name of the script and describe how
+to run it. Explain how you or your code choose the files.
+
+Answer: 
+There are 17029 text files included in the training data folder, so I took 10% (1703) files for this part of the homework, hams are 953 and spams are 750. 
+1.	Ham 3672 * 0.1 = 367 
+Spam 1500 * 0.1 = 150 
+2.	Ham 4361 * 0.1 = 436 
+Spam 1496 * 0.1 = 150 
+3.	Ham 1500 * 0.1 = 150 
+Spam 4500 * 0.1 = 450 
+Total => 17029 * 0.1 = 1703 
+
+There is no seperate code for this task.
+
