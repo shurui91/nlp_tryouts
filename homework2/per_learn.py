@@ -3,6 +3,9 @@ import random
 import timeit
 from collections import defaultdict
 
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 # timer
 start = timeit.default_timer()
 # input path

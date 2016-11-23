@@ -1,6 +1,9 @@
 # part 2
 import os, json, sys, math
 
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 f = open('nbmodel_part2.txt', 'r', encoding="latin1")
 lines = f.readlines()
 # print(len(lines))
