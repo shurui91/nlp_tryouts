@@ -1,0 +1,18 @@
+Assignment 3 Report
+
+Name:
+
+1. If you included files other than baseline_crf.py, advanced_crf.py, evaluate_model.py, and hw3_corpus_tool.py, or modified hw3_corpus_tool.py please describe what the files do and/or your modifications to hw3_corpus_tool.py.
+
+2. Describe how you evaluated your baseline and advanced features
+
+Replace this text with a description of how you used the labeled data
+to train and evaluate different models (e.g., moving ~25% data into a
+separate development directory).
+
+3. Describe your advanced feature set.
+
+4. If you tried alternate advanced feature sets, please describe them.
+
+5. Accuracy of baseline features was:
+6. Accuracy of advanced features was:
