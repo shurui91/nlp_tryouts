@@ -16,8 +16,8 @@ testdir = sys.argv[2]
 outputfile = sys.argv[3]
 
 # try to use functions from hw3_corpus_tool.py
-hw3_corpus_tool.get_utterances_from_filename("labeled data/0001.csv")
-
+the_file = hw3_corpus_tool.get_utterances_from_file("labeled data/0001.csv")
+print("the_file's data type is " + type(the_file))
 
 
 
