@@ -16,7 +16,7 @@ testdir = sys.argv[2]
 outputfile = sys.argv[3]
 
 # try to use functions from hw3_corpus_tool.py
-
+hw3_corpus_tool.get_utterances_from_filename("labeled data/0001.csv")
 
 
 
