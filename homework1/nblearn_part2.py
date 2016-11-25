@@ -1,6 +1,9 @@
 # part 2
 import os, fnmatch, glob, json, sys
 
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 ham_dictionary = {}
 spam_dictionary = {}
 combine_dictionary = {}

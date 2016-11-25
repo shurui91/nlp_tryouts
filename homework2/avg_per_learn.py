@@ -2,6 +2,9 @@ import os, fnmatch, glob, json, sys
 import random
 import timeit
 
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 # timer
 start = timeit.default_timer()
 # input path
