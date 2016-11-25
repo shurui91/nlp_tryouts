@@ -1,8 +1,7 @@
 import hw3_corpus_tool
-import os, sys, timeit
+import os, sys, timeit, pycrfsuite
+from pprint import pprint
 
-# print("hello world")
-# test_function.printme("does this also work???")
 __author__ = "Shurui Liu"
 __email__ = "shurui91@gmail.com"
 
@@ -16,10 +15,32 @@ testdir = sys.argv[2]
 outputfile = sys.argv[3]
 
 # try to use functions from hw3_corpus_tool.py
-the_file = hw3_corpus_tool.get_utterances_from_file("labeled data/0001.csv")
-print("the_file's data type is " + type(the_file))
+# target folder is "labeled data/"
+# test folder is "testdata/"
 
-
+# all the csv files
+the_file = hw3_corpus_tool.get_data("labeled data/")
+# a list of lists
+the_list = list(the_file)
+pprint(the_list[0][0])
+# start to write to a text file
+# text_file = open("test.txt", "w", encoding="latin1")
+# text_file.write(str(the_list[0][0]))
+# text_file.close()
+'''
+DialogUtterance(
+	act_tag='qw', 
+	speaker='A', 
+	pos=[
+		PosTag(token='What', pos='WP'), 
+		PosTag(token='are', pos='VBP'), 
+		PosTag(token='your', pos='PRP$'), 
+		PosTag(token='favorite', pos='JJ'), 
+		PosTag(token='programs', pos='NNS'), 
+		PosTag(token='?', pos='.')
+	], 
+	text='What are your favorite programs? /')
+'''
 
 
 
