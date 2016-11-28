@@ -46,16 +46,16 @@ DialogUtterance(
 '''
 
 all_features = []
-for file_utterance in train_list:
+for file in train_list:
 	# all the onefile_utterance in one file
 	# onefile_utterance = train_list[0]
 
 	# deal with file
 	file_feature = []
-	for i in range(len(file_utterance) - 1):
+	for i in range(len(file) - 1):
 		features = []
 		# speaker change
-		if (file_utterance[i][1] != file_utterance[i + 1][1]):
+		if (file[i][1] != file[i + 1][1]):
 			features.append(1)
 		else:
 			features.append(0)
@@ -67,7 +67,7 @@ for file_utterance in train_list:
 			features.append(1)
 		
 		# posttag, contain empty ones
-		posttag = file_utterance[i][2]
+		posttag = file[i][2]
 		if (posttag != None):
 			for j in posttag:
 				features.append("TOKEN_" + j[0])
