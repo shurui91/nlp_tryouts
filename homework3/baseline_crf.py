@@ -24,8 +24,6 @@ test_file = hw3_corpus_tool.get_data(testdir)
 train_list = list(train_file)
 test_list = list(test_file)
 
-# all the onefile_utterance in one file
-onefile_utterance = train_list[0]
 # first utterance tuple, first line
 #first_utterance_tuple = onefile_utterance[0]
 '''
@@ -46,30 +44,39 @@ DialogUtterance(
 	], 
 	text='What are your favorite programs? /')
 '''
-file_feature = []
-for i in range(len(onefile_utterance) - 1):
-	features = []
-	# speaker change
-	if (onefile_utterance[i][1] != onefile_utterance[i + 1][1]):
-		features.append(1)
-	else:
-		features.append(0)
 
-	# first utterance
-	if (i == 1):
-		features.append(0)
-	else:
-		features.append(1)
-	
-	# posttag, contain empty ones
-	posttag = onefile_utterance[i][2]
-	if (posttag != None):
-		for j in posttag:
-			features.append("TOKEN_" + j[0])
-			features.append("POS_" + j[1])
-	file_feature.append(features)
+all_features = []
+for file_utterance in train_list:
+	# all the onefile_utterance in one file
+	# onefile_utterance = train_list[0]
 
-pprint(file_feature)
+	# deal with file
+	file_feature = []
+	for i in range(len(file_utterance) - 1):
+		features = []
+		# speaker change
+		if (file_utterance[i][1] != file_utterance[i + 1][1]):
+			features.append(1)
+		else:
+			features.append(0)
+
+		# first utterance
+		if (i == 1):
+			features.append(0)
+		else:
+			features.append(1)
+		
+		# posttag, contain empty ones
+		posttag = file_utterance[i][2]
+		if (posttag != None):
+			for j in posttag:
+				features.append("TOKEN_" + j[0])
+				features.append("POS_" + j[1])
+		file_feature.append(features)
+	# append to the big list
+	all_features.append(file_feature)
+pprint(all_features[0])
+
 
 
 
