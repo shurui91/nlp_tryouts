@@ -11,26 +11,28 @@ __email__ = "shurui91@gmail.com"
 start = timeit.default_timer()
 
 # inputdir, testdir, and outputfile
-# python3 baseline_crf.py 'data/inputdir' 'outputdir/outputfile' 'output.txt'
+# python3 baseline_crf.py 'testdata/inputdir' 'testdata/testdir' 'output.txt'
 inputdir = sys.argv[1]
 testdir = sys.argv[2]
 outputfile = sys.argv[3]
 
-# try to use functions from hw3_corpus_tool.py
-# target folder is "labeled data/"
-# test folder is "testdata/"
-
 # all the csv files, data type is generator
-the_file = hw3_corpus_tool.get_data(inputdir)
+train_file = hw3_corpus_tool.get_data(inputdir)
+test_file = hw3_corpus_tool.get_data(testdir)
 
-# a list of lists
-the_list = list(the_file)
-pprint(the_list[0][0])
-# start to write to a text file
-# text_file = open("test.txt", "w", encoding="latin1")
-# text_file.write(str(the_list[0][0]))
-# text_file.close()
+# a list of all the files in inputdir and testdir
+train_list = list(train_file)
+test_list = list(test_file)
+
+# all the utterances in one file
+utterances = train_list[0]
+# first utterance tuple, first line
+#first_utterance_tuple = utterances[0]
 '''
+first_utterance_tuple[0] = act_tag
+first_utterance_tuple[1] = speaker
+first_utterance_tuple[2] = pos[]
+first_utterance_tuple[3] = text
 DialogUtterance(
 	act_tag='qw', 
 	speaker='A', 
@@ -44,6 +46,50 @@ DialogUtterance(
 	], 
 	text='What are your favorite programs? /')
 '''
+file_feature = []
+for i in range(len(utterances) - 1):
+	features = []
+	# speaker change
+	if (utterances[i][1] != utterances[i + 1][1]):
+		features.append(1)
+	else:
+		features.append(0)
+
+	# first utterance
+	if (i == 1):
+		features.append(0)
+	else:
+		features.append(1)
+	
+	# posttag, contain empty ones
+	posttag = utterances[i][2]
+	if (posttag != None):
+		for j in posttag:
+			features.append("TOKEN_" + j[0])
+			features.append("POS_" + j[1])
+	file_feature.append(features)
+
+pprint(file_feature)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
