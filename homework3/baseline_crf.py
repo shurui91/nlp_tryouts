@@ -4,9 +4,6 @@ sys.path.append('/usr/local/lib/python3.4/dist-packages')
 import pycrfsuite
 from pprint import pprint
 
-__author__ = "Shurui Liu"
-__email__ = "shurui91@gmail.com"
-
 # timer
 start = timeit.default_timer()
 
@@ -45,37 +42,64 @@ DialogUtterance(
 	text='What are your favorite programs? /')
 '''
 
-all_features = []
+# x_train, y_train
+x_train = []
+y_train = []
+
 for file in train_list:
 	# all the onefile_utterance in one file
 	# onefile_utterance = train_list[0]
 
 	# deal with file
 	file_feature = []
-	for i in range(len(file) - 1):
+	file_label = []
+
+	for line in range(len(file) - 1):
 		features = []
+		label = []
+
+		#act_tag
+		act_tag = file[line][0]
+		label.append(act_tag)
+
 		# speaker change
-		if (file[i][1] != file[i + 1][1]):
-			features.append(1)
+		if (file[line][1] != file[line + 1][1]):
+			features.append("1")
 		else:
-			features.append(0)
+			features.append("0")
 
 		# first utterance
-		if (i == 1):
-			features.append(0)
+		if (line == 1):
+			features.append("0")
 		else:
-			features.append(1)
+			features.append("1")
 		
 		# posttag, contain empty ones
-		posttag = file[i][2]
-		if (posttag != None):
-			for j in posttag:
-				features.append("TOKEN_" + j[0])
-				features.append("POS_" + j[1])
+		pos = file[line][2]
+		if (pos != None):
+			for posttag in pos:
+				features.append("TOKEN_" + posttag[0])
+				features.append("POS_" + posttag[1])
+		else:
+			continue
 		file_feature.append(features)
+		file_label.append(label)
+	
 	# append to the big list
-	all_features.append(file_feature)
-pprint(all_features[0])
+	x_train.append(file_feature)
+	y_train.append(file_label)
+
+	print(file_feature[0])
+	print(file_label[0])
+	print("\n")
+
+# train the model
+'''
+trainer = pycrfsuite.Trainer(verbose=False)
+for xseq, yseq in zip(x_train, y_train):
+	trainer.append(xseq, yseq)
+'''
+
 
 
 
