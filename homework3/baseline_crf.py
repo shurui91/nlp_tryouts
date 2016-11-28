@@ -24,10 +24,10 @@ test_file = hw3_corpus_tool.get_data(testdir)
 train_list = list(train_file)
 test_list = list(test_file)
 
-# all the utterances in one file
-utterances = train_list[0]
+# all the onefile_utterance in one file
+onefile_utterance = train_list[0]
 # first utterance tuple, first line
-#first_utterance_tuple = utterances[0]
+#first_utterance_tuple = onefile_utterance[0]
 '''
 first_utterance_tuple[0] = act_tag
 first_utterance_tuple[1] = speaker
@@ -47,10 +47,10 @@ DialogUtterance(
 	text='What are your favorite programs? /')
 '''
 file_feature = []
-for i in range(len(utterances) - 1):
+for i in range(len(onefile_utterance) - 1):
 	features = []
 	# speaker change
-	if (utterances[i][1] != utterances[i + 1][1]):
+	if (onefile_utterance[i][1] != onefile_utterance[i + 1][1]):
 		features.append(1)
 	else:
 		features.append(0)
@@ -62,7 +62,7 @@ for i in range(len(utterances) - 1):
 		features.append(1)
 	
 	# posttag, contain empty ones
-	posttag = utterances[i][2]
+	posttag = onefile_utterance[i][2]
 	if (posttag != None):
 		for j in posttag:
 			features.append("TOKEN_" + j[0])
