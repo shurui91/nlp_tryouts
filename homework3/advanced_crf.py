@@ -70,6 +70,12 @@ for file in test_list:
 		act_tag = file[line][0]
 		y_test.append(act_tag)
 
+		# act_tag change
+		if (file[line][0] != file[line + 1][0]):
+			line_feature.append("1")
+		else:
+			line_feature.append("0")
+
 		# speaker change
 		if (file[line][1] != file[line + 1][1]):
 			line_feature.append("1")
