@@ -8,7 +8,7 @@ from pprint import pprint
 start = timeit.default_timer()
 
 # inputdir, testdir, and outputfile
-# python3 baseline_crf.py 'data/inputdir' 'data/testdir' 'output.txt'
+# python3 baseline_crf.py 'data/inputdir' 'data/testdir' 'baseline_output.txt'
 inputdir = sys.argv[1]
 testdir = sys.argv[2]
 outputfile = sys.argv[3]
@@ -25,14 +25,14 @@ test_list = list(test_file)
 x_train = []
 y_train = []
 for file in train_list:
-	for line in range(len(file) - 1):
+	for line in range(1, len(file)):
 		line_feature = []
 		#act_tag
 		act_tag = file[line][0]
 		y_train.append(act_tag)
 
 		# speaker change
-		if (file[line][1] != file[line + 1][1]):
+		if (file[line][1] != file[line - 1][1]):
 			line_feature.append("1")
 		else:
 			line_feature.append("0")
@@ -64,14 +64,14 @@ for file in test_list:
 	file_len.append(length)
 
 
-	for line in range(len(file) - 1):
+	for line in range(1, len(file)):
 		line_feature = []
 		# act_tag
 		act_tag = file[line][0]
 		y_test.append(act_tag)
 
 		# speaker change
-		if (file[line][1] != file[line + 1][1]):
+		if (file[line][1] != file[line - 1][1]):
 			line_feature.append("1")
 		else:
 			line_feature.append("0")
@@ -100,7 +100,7 @@ trainer.append(x_train, y_train)
 trainer.set_params({
 	'c1': 1.0,   # coefficient for L1 penalty
 	'c2': 1e-3,  # coefficient for L2 penalty
-	'max_iterations': 150,  # stop earlier
+	'max_iterations': 100,  # stop earlier
 
 	# include transitions that are possible, but not observed
 	'feature.possible_transitions': True
@@ -127,7 +127,7 @@ def get_filename(data_dir):
 all_filename = get_filename(testdir)
 
 # write to nboutput.txt
-text_file = open("output.txt", "w")
+text_file = open("baseline_output.txt", "w")
 # text_file.write()
 
 t = 0
@@ -140,30 +140,6 @@ for i in range(len(all_filename)):
 	text_file.write('\n')
 
 text_file.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # print running time
