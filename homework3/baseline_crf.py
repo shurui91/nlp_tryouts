@@ -25,7 +25,7 @@ test_list = list(test_file)
 x_train = []
 y_train = []
 for file in train_list:
-	for line in range(1, len(file)):
+	for line in range(len(file) - 1):
 		line_feature = []
 		#act_tag
 		act_tag = file[line][0]
@@ -60,11 +60,11 @@ file_len = []
 
 for file in test_list:
 	# file length
-	length = len(file);
+	length = len(file) - 1;
 	file_len.append(length)
 
 
-	for line in range(1, len(file)):
+	for line in range(len(file) - 1):
 		line_feature = []
 		# act_tag
 		act_tag = file[line][0]
