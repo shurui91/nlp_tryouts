@@ -32,7 +32,7 @@ for file in train_list:
 		y_train.append(act_tag)
 
 		# speaker change
-		if (file[line][1] != file[line - 1][1]):
+		if (file[line][1] != file[line + 1][1]):
 			line_feature.append("1")
 		else:
 			line_feature.append("0")
@@ -71,7 +71,7 @@ for file in test_list:
 		y_test.append(act_tag)
 
 		# act_tag change
-		if (file[line][1] != file[line - 1][1]):
+		if (file[line][1] != file[line + 1][1]):
 			line_feature.append("1")
 		else:
 			line_feature.append("0")
@@ -140,7 +140,7 @@ t = 0
 for i in range(len(all_filename)):
 	head, tail = os.path.split(all_filename[i])
 	text_file.write('Filename=\"' + tail + '\"\n')
-	for j in range(file_len[i]):
+	for j in range(file_len[i] - 1):
 		text_file.write(tags[t] + '\n')
 		t += 1
 	text_file.write('\n')
