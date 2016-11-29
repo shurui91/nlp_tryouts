@@ -48,32 +48,31 @@ y_train = []
 
 for file in train_list:
 	for line in range(len(file) - 1):
-		file_feature = []
+		line_feature = []
 		#act_tag
 		act_tag = file[line][0]
 		y_train.append(act_tag)
 
 		# speaker change
 		if (file[line][1] != file[line + 1][1]):
-			file_feature.append("1")
+			line_feature.append("1")
 		else:
-			file_feature.append("0")
+			line_feature.append("0")
 
 		# first utterance
 		if (line == 1):
-			file_feature.append("0")
+			line_feature.append("0")
 		else:
-			file_feature.append("1")
+			line_feature.append("1")
 		
 		# posttag, contain empty ones
 		pos = file[line][2]
 		if (pos != None):
 			for posttag in pos:
-				file_feature.append("TOKEN_" + posttag[0])
-				file_feature.append("POS_" + posttag[1])
-	
-	# append to the big list
-	x_train.append(file_feature)
+				line_feature.append("TOKEN_" + posttag[0])
+				line_feature.append("POS_" + posttag[1])
+		
+		x_train.append(line_feature)
 
 print(len(x_train))
 print(len(y_train))
