@@ -21,31 +21,9 @@ test_file = hw3_corpus_tool.get_data(testdir)
 train_list = list(train_file)
 test_list = list(test_file)
 
-# first utterance tuple, first line
-#first_utterance_tuple = onefile_utterance[0]
-'''
-first_utterance_tuple[0] = act_tag
-first_utterance_tuple[1] = speaker
-first_utterance_tuple[2] = pos[]
-first_utterance_tuple[3] = text
-DialogUtterance(
-	act_tag='qw', 
-	speaker='A', 
-	pos=[
-		PosTag(token='What', pos='WP'), 
-		PosTag(token='are', pos='VBP'), 
-		PosTag(token='your', pos='PRP$'), 
-		PosTag(token='favorite', pos='JJ'), 
-		PosTag(token='programs', pos='NNS'), 
-		PosTag(token='?', pos='.')
-	], 
-	text='What are your favorite programs? /')
-'''
-
 # x_train, y_train
 x_train = []
 y_train = []
-
 for file in train_list:
 	for line in range(len(file) - 1):
 		line_feature = []
@@ -74,17 +52,63 @@ for file in train_list:
 		
 		x_train.append(line_feature)
 
-print(len(x_train))
-print(len(y_train))
+
+# x_test, y_test
+x_test = []
+y_test = []
+for file in test_list:
+	for line in range(len(file) - 1):
+		line_feature = []
+		#act_tag
+		act_tag = file[line][0]
+		y_test.append(act_tag)
+
+		# speaker change
+		if (file[line][1] != file[line + 1][1]):
+			line_feature.append("1")
+		else:
+			line_feature.append("0")
+
+		# first utterance
+		if (line == 1):
+			line_feature.append("0")
+		else:
+			line_feature.append("1")
+		
+		# posttag, contain empty ones
+		pos = file[line][2]
+		if (pos != None):
+			for posttag in pos:
+				line_feature.append("TOKEN_" + posttag[0])
+				line_feature.append("POS_" + posttag[1])
+		
+		x_test.append(line_feature)
 
 
-
-'''
-# train the model
+# In[8], train the model
 trainer = pycrfsuite.Trainer(verbose=False)
-for xseq, yseq in zip(x_train, y_train):
-	trainer.append(x_train, y_train)
-'''
+trainer.append(x_train, y_train)
+
+# In[9], set training parameters
+trainer.set_params({
+	'c1': 1.0,   # coefficient for L1 penalty
+	'c2': 1e-3,  # coefficient for L2 penalty
+	'max_iterations': 50,  # stop earlier
+
+	# include transitions that are possible, but not observed
+	'feature.possible_transitions': True
+})
+
+# In[11], Train the model
+trainer.train('conll2002-esp.crfsuite')
+
+# pprint(trainer.logparser.last_iteration)
+
+tagger = pycrfsuite.Tagger()
+tagger.open('conll2002-esp.crfsuite')
+y_pred = [tagger.tag(xseq) for xseq in x_test]
+pprint(y_pred)
+
 
 
 
