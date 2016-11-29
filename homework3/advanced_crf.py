@@ -150,4 +150,4 @@ text_file.close()
 
 # print running time
 stop = timeit.default_timer()
-print("baseline_crf.py running time is " + str(stop - start))
+print("advanced_crf.py running time is " + str(stop - start))
