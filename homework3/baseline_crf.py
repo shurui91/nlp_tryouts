@@ -47,59 +47,45 @@ x_train = []
 y_train = []
 
 for file in train_list:
-	# all the onefile_utterance in one file
-	# onefile_utterance = train_list[0]
-
-	# deal with file
-	file_feature = []
-	file_label = []
-
 	for line in range(len(file) - 1):
-		features = []
-		label = []
-
+		file_feature = []
 		#act_tag
 		act_tag = file[line][0]
-		label.append(act_tag)
+		y_train.append(act_tag)
 
 		# speaker change
 		if (file[line][1] != file[line + 1][1]):
-			features.append("1")
+			file_feature.append("1")
 		else:
-			features.append("0")
+			file_feature.append("0")
 
 		# first utterance
 		if (line == 1):
-			features.append("0")
+			file_feature.append("0")
 		else:
-			features.append("1")
+			file_feature.append("1")
 		
 		# posttag, contain empty ones
 		pos = file[line][2]
 		if (pos != None):
 			for posttag in pos:
-				features.append("TOKEN_" + posttag[0])
-				features.append("POS_" + posttag[1])
-		else:
-			continue
-		file_feature.append(features)
-		file_label.append(label)
+				file_feature.append("TOKEN_" + posttag[0])
+				file_feature.append("POS_" + posttag[1])
 	
 	# append to the big list
 	x_train.append(file_feature)
-	y_train.append(file_label)
 
-	print(file_feature[0])
-	print(file_label[0])
-	print("\n")
+print(len(x_train))
+print(len(y_train))
 
-# train the model
+
+
 '''
+# train the model
 trainer = pycrfsuite.Trainer(verbose=False)
 for xseq, yseq in zip(x_train, y_train):
-	trainer.append(xseq, yseq)
+	trainer.append(x_train, y_train)
 '''
-
 
 
 
