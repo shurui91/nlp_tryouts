@@ -56,8 +56,14 @@ for file in train_list:
 # x_test, y_test
 x_test = []
 y_test = []
+file_len = []
+
 for file in test_list:
-	print(len(file) -1)
+	# file length
+	length = len(file) - 1;
+	file_len.append(length)
+
+
 	for line in range(len(file) - 1):
 		line_feature = []
 		#act_tag
@@ -111,8 +117,8 @@ tagger.open('conll2002-esp.crfsuite')
 #pprint(y_pred)
 
 
-print(len(tagger.tag(x_test)))
-
+# print(len(tagger.tag(x_test)))
+tags = tagger.tag(x_test)
 
 def get_filename(data_dir):
 	dialog_filenames = sorted(glob.glob(os.path.join(data_dir, "*.csv")))
@@ -120,8 +126,20 @@ def get_filename(data_dir):
 
 all_filename = get_filename(testdir)
 
-for i in all_filename:
-	print (i)
+# write to nboutput.txt
+text_file = open("output.txt", "w")
+# text_file.write()
+
+t = 0
+for i in range(len(all_filename)):
+	head, tail = os.path.split(all_filename[i])
+	text_file.write('Filename=\"' + tail + '\"\r')
+	for j in range(file_len[i]):
+		text_file.write(tags[t] + '\r')
+		t += 1
+	text_file.write('\r')
+
+text_file.close()
 
 
 
