@@ -1,6 +1,6 @@
 import hw3_corpus_tool
 import os, sys, timeit, glob
-# sys.path.append('/usr/local/lib/python3.4/dist-packages')
+sys.path.append('/usr/local/lib/python3.4/dist-packages')
 import pycrfsuite
 from pprint import pprint
 
@@ -25,7 +25,7 @@ test_list = list(test_file)
 x_train = []
 y_train = []
 for file in train_list:
-	for line in range(len(file) - 1):
+	for line in range(len(file)):
 		line_feature = []
 		#act_tag
 		act_tag = file[line][0]
@@ -52,19 +52,17 @@ for file in train_list:
 		
 		x_train.append(line_feature)
 
-
 # x_test, y_test
 x_test = []
 y_test = []
 file_len = []
 
 for file in test_list:
-	# file length
-	length = len(file) - 1;
+	# length for each file
+	length = len(file)
 	file_len.append(length)
 
-
-	for line in range(len(file) - 1):
+	for line in range(len(file)):
 		line_feature = []
 		# act_tag
 		act_tag = file[line][0]

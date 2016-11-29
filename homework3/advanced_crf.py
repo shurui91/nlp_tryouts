@@ -59,8 +59,8 @@ y_test = []
 file_len = []
 
 for file in test_list:
-	# file length
-	length = len(file) - 1;
+	# length for each file
+	length = len(file)
 	file_len.append(length)
 
 
