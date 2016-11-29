@@ -1,6 +1,6 @@
 import hw3_corpus_tool
 import os, sys, timeit, glob
-sys.path.append('/usr/local/lib/python3.4/dist-packages')
+# sys.path.append('/usr/local/lib/python3.4/dist-packages')
 import pycrfsuite
 from pprint import pprint
 
@@ -60,7 +60,7 @@ file_len = []
 
 for file in test_list:
 	# file length
-	length = len(file) - 1;
+	length = len(file);
 	file_len.append(length)
 
 

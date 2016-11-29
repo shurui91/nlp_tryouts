@@ -1,18 +1,55 @@
 Assignment 3 Report
 
-Name:
+Name: Shurui Liu
 
 1. If you included files other than baseline_crf.py, advanced_crf.py, evaluate_model.py, and hw3_corpus_tool.py, or modified hw3_corpus_tool.py please describe what the files do and/or your modifications to hw3_corpus_tool.py.
+There is no extra files included in my submission.
 
-2. Describe how you evaluated your baseline and advanced features
+2. Describe how you evaluated your baseline and advanced features.
+Based on the tutorial from http://nbviewer.jupyter.org/github/tpeng/python-crfsuite/blob/master/examples/CoNLL%202002.ipynb and the PDF, 
+the features that I have is below. 
 
-Replace this text with a description of how you used the labeled data
-to train and evaluate different models (e.g., moving ~25% data into a
-separate development directory).
+For baseline, for one feature, it can be saved as
+feature = [
+	'speaker_changed': 0 or 1, 0 means did not change, 1 means changed, 
+	'first_utterance': whether this is the first utterance of the dialogue, 
+	'TOKEN': 'TOKEN_xxxxxx', 
+	'POS': 'q'
+]; 
+
+An example could be (for one utterance)
+feature = [
+	0, 0, 'TOKEN_What', 'TOKEN_are', 'TOKEN_your', 'TOKEN_favorite', 'TOKEN_programs', 'TOKEN_?',
+	'POS_WP', 'POS_VBP', 'POS_PRP$', 'POS_JJ', 'POS_NNS', 'POS_.'
+]
+
+Then I made a list called all_features[](two-dimensional) to store all the feature[]s in all the inputdir files like this,
+all_features[] = [
+	feature[], feature[], feature[], ......
+]
+
+label = [all the act_tags in all the inputdir files], label[] is one-dimensional
+
+There are 1076 files in total so I manually picked 807 files (75%) as the training files, and the rest 269 files (25%) are the dev files. 
+Then I used pycrfsuite to train the model based on the tutorial from Jupyter.
 
 3. Describe your advanced feature set.
+feature = [
+	'speaker_changed': 0 or 1, 0 means did not change, 1 means changed, 
+	'pos_tag_changed': 0 or 1, 0 means did not change, 1 means changed, 
+	'first_utterance': whether this is the first utterance of the dialogue, 
+	'TOKEN': 'TOKEN_xxxxxx', 
+	'POS': 'q'
+];
+
+An example could be (for one utterance)
+feature = [
+	0, 0, 1, 'TOKEN_What', 'TOKEN_are', 'TOKEN_your', 'TOKEN_favorite', 'TOKEN_programs', 'TOKEN_?',
+	'POS_WP', 'POS_VBP', 'POS_PRP$', 'POS_JJ', 'POS_NNS', 'POS_.'
+]
 
 4. If you tried alternate advanced feature sets, please describe them.
+I only did baseline and advanced. advanced_crf.py added one more feature in the feature[] list, which is explained in Question 3. 
 
-5. Accuracy of baseline features was:
-6. Accuracy of advanced features was:
+5. Accuracy of baseline features was: 71.077, 100 iterations. 
+6. Accuracy of advanced features was: 68.555, just tiny better than baseline feature result, 100 iterations. 
