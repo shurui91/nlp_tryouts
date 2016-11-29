@@ -1,5 +1,5 @@
 import hw3_corpus_tool
-import os, sys, timeit
+import os, sys, timeit, glob
 sys.path.append('/usr/local/lib/python3.4/dist-packages')
 import pycrfsuite
 from pprint import pprint
@@ -57,6 +57,7 @@ for file in train_list:
 x_test = []
 y_test = []
 for file in test_list:
+	print(len(file) -1)
 	for line in range(len(file) - 1):
 		line_feature = []
 		#act_tag
@@ -106,10 +107,21 @@ trainer.train('conll2002-esp.crfsuite')
 
 tagger = pycrfsuite.Tagger()
 tagger.open('conll2002-esp.crfsuite')
-y_pred = [tagger.tag(xseq) for xseq in x_test]
-pprint(y_pred)
+#y_pred = [tagger.tag(xseq) for xseq in x_test]
+#pprint(y_pred)
 
 
+print(len(tagger.tag(x_test)))
+
+
+def get_filename(data_dir):
+	dialog_filenames = sorted(glob.glob(os.path.join(data_dir, "*.csv")))
+	return dialog_filenames
+
+all_filename = get_filename(testdir)
+
+for i in all_filename:
+	print (i)
 
 
 
