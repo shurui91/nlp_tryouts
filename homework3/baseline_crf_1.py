@@ -1,18 +1,14 @@
 import hw3_corpus_tool
 import os, sys, timeit, glob
 sys.path.append('/usr/local/lib/python3.4/dist-packages')
-sys.path.append('/usr/lib/python3/dist-packages')
 import pycrfsuite
 from pprint import pprint
-
-__author__ = "Shurui Liu"
-__email__ = "shurui91@gmail.com"
 
 # timer
 start = timeit.default_timer()
 
 # inputdir, testdir, and outputfile
-# python3 baseline_crf.py 'testdata/inputdir' 'testdata/testdir' 'advanced_output.txt'
+# python3 baseline_crf.py 'data/inputdir' 'data/testdir' 'baseline_output.txt'
 inputdir = sys.argv[1]
 testdir = sys.argv[2]
 outputfile = sys.argv[3]
@@ -29,14 +25,16 @@ test_list = list(test_file)
 x_train = []
 y_train = []
 for file in train_list:
-	for line in range(len(file) - 1):
+	for line in range(len(file)):
 		line_feature = []
 		#act_tag
 		act_tag = file[line][0]
 		y_train.append(act_tag)
 
 		# speaker change
-		if (file[line][1] != file[line + 1][1]):
+		if (file[line] == 0):
+			line_feature.append("0")
+		elif (file[line][1] != file[line - 1][1]):
 			line_feature.append("1")
 		else:
 			line_feature.append("0")
@@ -56,7 +54,6 @@ for file in train_list:
 		
 		x_train.append(line_feature)
 
-
 # x_test, y_test
 x_test = []
 y_test = []
@@ -67,21 +64,16 @@ for file in test_list:
 	length = len(file)
 	file_len.append(length)
 
-
-	for line in range(len(file) - 1):
+	for line in range(len(file)):
 		line_feature = []
 		# act_tag
 		act_tag = file[line][0]
 		y_test.append(act_tag)
 
-		# act_tag change
-		if (file[line][1] != file[line + 1][1]):
-			line_feature.append("1")
-		else:
-			line_feature.append("0")
-
 		# speaker change
-		if (file[line][1] != file[line - 1][1]):
+		if (file[line] == 0):
+			line_feature.append("0")
+		elif (file[line][1] != file[line - 1][1]):
 			line_feature.append("1")
 		else:
 			line_feature.append("0")
@@ -137,7 +129,7 @@ def get_filename(data_dir):
 all_filename = get_filename(testdir)
 
 # write to nboutput.txt
-text_file = open("advanced_output.txt", "w")
+text_file = open("baseline_output.txt", "w")
 # text_file.write()
 
 t = 0
@@ -154,4 +146,4 @@ text_file.close()
 
 # print running time
 stop = timeit.default_timer()
-print("advanced_crf.py running time is " + str(stop - start))
+print("baseline_crf.py running time is " + str(stop - start))

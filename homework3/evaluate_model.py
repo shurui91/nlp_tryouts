@@ -2,8 +2,12 @@
 import hw3_corpus_tool
 import os, sys, timeit, glob
 sys.path.append('/usr/local/lib/python3.4/dist-packages')
+sys.path.append('/usr/lib/python3/dist-packages')
 import pycrfsuite
 from pprint import pprint
+
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
 
 # timer
 start = timeit.default_timer()
