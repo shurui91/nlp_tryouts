@@ -1,3 +1,6 @@
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 # evaluate_model_baseline.py
 import hw3_corpus_tool
 import os, sys, timeit, glob

@@ -1,3 +1,6 @@
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 import hw3_corpus_tool
 import os, sys, timeit, glob
 # sys.path.append('/usr/local/lib/python3.4/dist-packages')
