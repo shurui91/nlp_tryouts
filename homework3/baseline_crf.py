@@ -1,3 +1,6 @@
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
+
 import hw3_corpus_tool
 import os, sys, timeit, glob
 sys.path.append('/usr/local/lib/python3.4/dist-packages')
@@ -28,6 +31,7 @@ test_list = list(test_file)
 # x_train, y_train
 x_train = []
 y_train = []
+# for all the files in the list
 for file in train_list:
 	for line in range(len(file) - 1):
 		line_feature = []
