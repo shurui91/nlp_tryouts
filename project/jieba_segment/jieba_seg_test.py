@@ -1,4 +1,5 @@
-__author__ = 'Shurui Liu'
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
 # try to read from excel file
 import sys, jieba, openpyxl, timeit, csv
 
