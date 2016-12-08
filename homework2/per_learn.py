@@ -1,12 +1,17 @@
 import os, fnmatch, glob, json, sys
 import random
 import timeit
+from collections import defaultdict
+
+__author__ = "Shurui Liu"
+__email__ = "shurui91@gmail.com"
 
 # timer
 start = timeit.default_timer()
 # input path
-# 'Spam or Ham\train\'
+# "Spam or Ham/train/"
 inputpath = sys.argv[1]
+print(inputpath)
 
 # start the program, make a dictionary to keep all the words
 combine_dictionary = {}
@@ -47,8 +52,6 @@ for root, dirs, files in os.walk(inputpath):
 
 # make all the index to be zero in the combined dictionary
 combine_dictionary = combine_dictionary.fromkeys(combine_dictionary, 0)
-
-print(len(file_list))
 
 # start to read from file_list
 alpha = 0
@@ -92,8 +95,6 @@ for counter in range(20):
 				for word in email[1:]:
 					combine_dictionary[word] += 1
 				bias += 1
-#print(bias)
-#print(type(bias))
 
 # add bias to the dictionary
 combine_dictionary['hw_bias'] = bias
@@ -109,4 +110,3 @@ text_file.close()
 # print running time
 stop = timeit.default_timer()
 print ("per_learn.py running time is " + str(stop - start))
-

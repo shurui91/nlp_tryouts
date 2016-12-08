@@ -1,8 +1,5 @@
 import os, json, sys
 
-__author__ = "Shurui Liu"
-__email__ = "shurui91@gmail.com"
-
 # 'Spam or Ham\dev\'
 inputpath = sys.argv[1]
 # 'per_output.txt'

@@ -1,9 +1,6 @@
 import os, fnmatch, glob, json
 from collections import Counter
 
-__author__ = "Shurui Liu"
-__email__ = "shurui91@gmail.com"
-
 ham_dictionary = {}
 spam_dictionary = {}
 combine_dictionary = {}
