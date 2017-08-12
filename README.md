@@ -1,2 +1,2 @@
 # nlp_tryouts
-some nlp related tryouts implemented with Python
+some natural language processing project implemented with Python
